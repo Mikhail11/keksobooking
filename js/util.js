@@ -11,27 +11,27 @@ function getRandomArr(arr) {
 
 function getRandomInteger(min, max) {
   if (min < 0 || max < 0) {
-    return 'Вы ввели отрицательные значения диапазона';
+    return 0;
   }
   else if (min >= max) {
-    return 'Минимальное значение диапазона не может быть больше или равно максимальному';
+    let swap = min;
+    min = max;
+    max = swap;
   }
-  else {
-    return Math.ceil(Math.random() * (max - min));
-  }
+  return Math.ceil(Math.random() * (max - min));
 }
 
 function getRandomFloat(min, max, decimalPlaces) {
   if (min < 0 || max < 0) {
-    return 'Вы ввели отрицательные значения диапазона';
+    return 0;
   }
   else if (min >= max)  {
-    return 'Минимальное значение диапазона не может быть больше или равно максимальному';
+    let swap = min;
+    min = max;
+    max = swap;
   }
-  else {
-    let result = max - Math.random() * (max - min);
-    return result.toFixed(decimalPlaces);
-  }
+  let result = max - Math.random() * (max - min);
+  return result.toFixed(decimalPlaces);
 }
 
 export {getRandomInteger, getRandomArr, getRandomFloat};

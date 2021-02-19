@@ -1,2 +1,3 @@
-import {getRandomFloat, getRandomArr, getRandomInteger} from './util';
-import {bookingObjects} from './data';
+import {showPopup} from './similar-objects-generation.js';
+
+showPopup(0);

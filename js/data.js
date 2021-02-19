@@ -1,4 +1,4 @@
-import {getRandomFloat, getRandomArr, getRandomInteger} from './util';
+import {getRandomFloat, getRandomArr, getRandomInteger} from './util.js';
 
 const TITLE_WORDS = [
   'Экономичный вариант для большой компании',
@@ -46,28 +46,23 @@ const DESCRIPTIONS = [
   'Гостевой дом Vatical Style расположен в Ватикане, район Прати в Риме, всего в 150 метрах от площади Святого Петра.',
 ];
 
-let authors = [];
-let offers = [];
-let locations = [];
-let bookingObjects = [];
-//
+const OBJECTS_COUNT = 10;
 
-createBookingObjects(10);
+const AUTHORS = new Array(OBJECTS_COUNT).fill(null).map(()=>createAuthor());
+const LOCATIONS = new Array(OBJECTS_COUNT).fill(null).map(() => createLocation());
+const OFFERS = new Array(OBJECTS_COUNT).fill(null).map(() => createOffer());
+let bookingObjects = [];
 
 
 function createBookingObjects(count) {
-  authors = new Array(count).fill(null).map(()=>createAuthor());
-  locations = new Array(count).fill(null).map(() => createLocation());
-  offers = new Array(count).fill(null).map(() => createOffer());
-
-  bookingObjects = new Array(count).fill(null).map(() => {
+  let  Objects = new Array(count).fill(null).map(() => {
     return {
-      author: authors[getRandomInteger(0, authors.length - 1)],
-      offer: offers[getRandomInteger(0, offers.length - 1)],
-      location: locations[getRandomInteger(0, locations.length - 1)],
+      author: AUTHORS[getRandomInteger(0, AUTHORS.length - 1)],
+      offer: OFFERS[getRandomInteger(0, OFFERS.length - 1)],
+      location: LOCATIONS[getRandomInteger(0, LOCATIONS.length - 1)],
     }
   });
-  return bookingObjects;
+  return Objects;
 }
 
 function createAuthor(){
@@ -79,7 +74,7 @@ function createAuthor(){
 function createOffer() {
   return {
     title: TITLE_WORDS[getRandomInteger(0, TITLE_WORDS.length-1)],
-    address: locations[getRandomInteger(0,locations.length-1)].x + ', ' + locations[getRandomInteger(0,locations.length-1)].y,
+    address: LOCATIONS[getRandomInteger(0,LOCATIONS.length-1)].x + ', ' + LOCATIONS[getRandomInteger(0,LOCATIONS.length-1)].y,
     price: getRandomInteger(10, 1000000),
     type: OBJECT_TYPES[getRandomInteger(0, OBJECT_TYPES.length-1)],
     rooms: getRandomInteger(1, 5),
@@ -98,5 +93,7 @@ function createLocation() {
     y: getRandomFloat(139.70000, 139.80000, 5),
   };
 }
+
+bookingObjects = createBookingObjects(OBJECTS_COUNT);
 
 export {bookingObjects};
